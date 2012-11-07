@@ -4,11 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-//using System.Windows.Documents;
 using System.Windows.Input;
-//using System.Windows.Media;
 using System.Windows.Media.Animation;
-//using System.Windows.Shapes;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using TweetSharp;
@@ -20,8 +17,7 @@ using System.Collections.ObjectModel;
 //eemalda
 using System.Diagnostics;
 
-// Mis juhtub kui internetti ei ole
-// veebilehtedele backiga navigeerumine
+
 namespace WP7Klient
 {
     public partial class Login : PhoneApplicationPage

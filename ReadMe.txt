@@ -5,12 +5,13 @@ Twitter.com baasunktsionaalsust realiseeriv rakendus, mis loodi eesmärgiga õpp
 Windows Phone SDK 7.1(Mango).
 
 
-Rakenduse käivitamiseks on vajalik
-==================================
+Rakenduse käivitamiseks emulaatoris on vajalik
+==============================================
 
+- C# kompilaator
 - Microsot Visual Studio 2010
 - Microsoft Windows Phone SDK 7.1
-- C# kompilaator
+
 
 Märkmed realisatsiooni kohta
 ============================

@@ -23,9 +23,6 @@ using System.ComponentModel;
 using WP7Klient.Utility;
 using WP7Klient.Handling;
 using WP7Klient.Models;
-
-//eemalda
-
 using System.Diagnostics;
 
 
@@ -295,7 +292,6 @@ namespace WP7Klient
         private void About_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
-
         }
 
     }
