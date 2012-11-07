@@ -76,6 +76,7 @@ namespace WP7Klient
                 Path = "/1.1/statuses/home_timeline.json",
                 Method = Hammock.Web.WebMethod.Get
             };
+
             var callback = new RestCallback((restRt, restResponse, userState) =>
             {
                 if (restResponse.StatusCode == HttpStatusCode.Unauthorized)
@@ -98,13 +99,6 @@ namespace WP7Klient
             });
 
             restClient.BeginRequest(restRequest, callback);
-        }
-
- 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-        {
-            while (NavigationService.CanGoBack)
-                NavigationService.RemoveBackEntry();
         }
 
         private void tweetSubmit_Click(object sender, RoutedEventArgs e)
@@ -150,88 +144,6 @@ namespace WP7Klient
             restClient.BeginRequest(restRequest, callback);        
         }
 
-
-        private void Perform(Action myMethod, int delayInMilliseconds)
-        {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (s, e) => Thread.Sleep(delayInMilliseconds);
-            worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
-            worker.RunWorkerAsync();
-        }
-
-        private void tweetsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // If selected index is -1 (no selection) do nothing
-            if (tweetsList.SelectedIndex == -1)
-                return;
-
-            Tweet selectedItem = tweetsList.SelectedItem as Tweet;
-
-            if (selectedItem != null)
-            {
-                string textValue = selectedItem.Text;
-                int linkLocation = textValue.ToLower().IndexOf("http");
-                if (linkLocation != -1)
-                {
-                    StringBuilder b = new StringBuilder();
-                    for (int i = linkLocation; i < textValue.Length; i++)
-                    {
-                        char nextChar = textValue[i];
-                        if (nextChar == ' ')
-                            break;
-                        b.Append(nextChar);
-                    }
-
-                    string result = b.ToString();
-                    if (result.Length > 0)
-                    {
-                        WebBrowserTask task = new WebBrowserTask();
-                        task.Uri = new Uri(result);
-                        task.Show();
-                    }
-                }
- 
-                    
-            }
-            tweetsList.SelectedIndex = -1;
-        }
-        private void searchList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // If selected index is -1 (no selection) do nothing
-            if (searchList.SelectedIndex == -1)
-                return;
-
-            Tweet selectedItem = searchList.SelectedItem as Tweet;
-
-            if (selectedItem != null)
-            {
-                string textValue = selectedItem.Text;
-                int linkLocation = textValue.ToLower().IndexOf("http");
-                if (linkLocation != -1)
-                {
-                    StringBuilder b = new StringBuilder();
-                    for (int i = linkLocation; i < textValue.Length; i++)
-                    {
-                        char nextChar = textValue[i];
-                        if (nextChar == ' ')
-                            break;
-                        b.Append(nextChar);
-                    }
-
-                    string result = b.ToString();
-                    if (result.Length > 0)
-                    {
-                        WebBrowserTask task = new WebBrowserTask();
-                        task.Uri = new Uri(result);
-                        task.Show();
-                    }
-                }
-
-
-            }
-            searchList.SelectedIndex = -1;
-        }
-
         private void Search_Click(object sender, EventArgs e)
         {
             searchSubmit.Background = new SolidColorBrush(Colors.Gray);
@@ -269,15 +181,58 @@ namespace WP7Klient
                         searchSubmit.Background = App.Current.Resources["PhoneAccentBrush"] as SolidColorBrush;
                     });
                 }
-
             });
-            //Search.Text
+
             restRequest.AddParameter("q", Search.Text);
             restRequest.AddParameter("result_type", "mixed");
             restRequest.AddParameter("count", "20");
             restClient.BeginRequest(restRequest, callback);
+        }
 
-        
+        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox tweetlist = sender as ListBox;
+            // If selected index is -1 (no selection) do nothing
+            if (tweetlist.SelectedIndex == -1)
+                return;
+
+            Tweet selectedItem = tweetlist.SelectedItem as Tweet;
+
+            if (selectedItem != null)
+            {
+                string textValue = selectedItem.Text;
+                int linkLocation = textValue.ToLower().IndexOf("http");
+                if (linkLocation != -1)
+                {
+                    StringBuilder b = new StringBuilder();
+                    for (int i = linkLocation; i < textValue.Length; i++)
+                    {
+                        char nextChar = textValue[i];
+                        if (nextChar == ' ')
+                            break;
+                        b.Append(nextChar);
+                    }
+
+                    string result = b.ToString();
+                    if (result.Length > 0)
+                    {
+                        WebBrowserTask task = new WebBrowserTask();
+                        task.Uri = new Uri(result);
+                        task.Show();
+                    }
+                }
+
+
+            }
+            searchList.SelectedIndex = -1;
+        }
+
+        private void Perform(Action myMethod, int delayInMilliseconds)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (s, e) => Thread.Sleep(delayInMilliseconds);
+            worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
+            worker.RunWorkerAsync();
         }
 
         private void Search_KeyUp(object sender, KeyEventArgs e)
@@ -287,6 +242,12 @@ namespace WP7Klient
                 Search_Click(sender, e);
                 searchList.Focus();
             }
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            while (NavigationService.CanGoBack)
+                NavigationService.RemoveBackEntry();
         }
 
         private void About_Click(object sender, EventArgs e)
