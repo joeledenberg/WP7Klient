@@ -13,7 +13,7 @@ namespace WP7Klient
         public About()
         {
             InitializeComponent();
-            this.aboutText.Text = "Versioon 1.0\r\n\r\nTwitteri baasfunktsionaalsust realiseeriv rakendus. Kirjutatud Joel Edenbergi poolt eesmärgiga õppida kasutama Windows Phone 7.5 SDK'd.";
+            this.aboutText.Text = "Versioon 1.0\r\n\r\nTwitteri baasfunktsionaalsust realiseeriv rakendus. Kirjutatud Joel Edenbergi poolt eesmärgiga õppida kasutama Windows Phone 7.1 SDK'd.";
         }
 
         private void Suggestion_Click(object sender, RoutedEventArgs e)
