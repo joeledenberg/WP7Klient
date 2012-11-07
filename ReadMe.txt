@@ -18,9 +18,10 @@ Märkmed realisatsiooni kohta
 
 - Kasutatakse OAuth PIN-koodil baseeruvat identifitseerimist, kusjuures tagastatud PIN
   loetakse sisse ilma kasutaja sekkumiseta.
-- Kasutaja identifitseerimise ajal toimib telefoni "Tagasi nupp" veebilehtiseja tagasi-nupuna.
-- Postitustes (tweet'ides) leiduvad URL'id avatakse veebilehtisejas, kui vastavale postitusele
-  vajutada.
+- Kasutaja identifitseerimise ajal toimib telefoni "Tagasi nupp" veebilehtiseja tagasi-
+  nupuna.
+- Postitustes (tweet'ides) leiduvad URL'id avatakse veebilehtisejas, kui vastavale
+  postitusele vajutada.
 - Nupud, millega alustatakse otsingut või lisatakse postitus, muudavad andmete edastamise
   ajal halliks. Sellisel viisil antakse kasutajale visuaalset tagasisidet pooleliolevast
   protsessist.
